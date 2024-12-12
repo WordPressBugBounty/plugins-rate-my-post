@@ -4,7 +4,7 @@
  * Plugin Name:        FeedbackWP - Rate My Post - WP Rating System
  * Plugin URI:        https://feedbackwp.com
  * Description:       Allows you to easily add rating functionality to your WordPress website.
- * Version:           4.2.4
+ * Version:           4.2.5
  * Author:            FeedbackWP
  * Author URI:        https://feedbackwp.com/
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ function rmp_disable_notice()
 }
 
 // Plugin version
-define('RATE_MY_POST_VERSION', '4.2.4');
+define('RATE_MY_POST_VERSION', '4.2.5');
 define('RATE_MY_POST_SYSTEM_FILE_PATH', __FILE__);
 
 // Plugin activation
@@ -65,6 +65,7 @@ add_action('plugins_loaded', 'upgrade_rate_my_post');
 
 //developer functions
 require plugin_dir_path(__FILE__) . 'includes/dev-functions.php';
+require plugin_dir_path(__FILE__) . 'includes/Shogun.php';
 
 // The core plugin class
 require plugin_dir_path(__FILE__) . 'includes/class-rate-my-post.php';
