@@ -26,6 +26,16 @@ class Rate_My_Post_Public
         $this->version      = $version;
     }
 
+    public static function is_not_votable()
+    {
+        $security = get_option('rmp_security');
+
+        return apply_filters(
+            'rmp_is_not_votable',
+            isset($security['votingPriv']) && $security['votingPriv'] == 2 && ! is_user_logged_in()
+        );
+    }
+
     //---------------------------------------------------
     // PUBLIC CSS
     //---------------------------------------------------
@@ -36,8 +46,7 @@ class Rate_My_Post_Public
             $this->rate_my_post,
             plugin_dir_url(__FILE__) . 'css/rate-my-post.min.css',
             array(),
-            $this->version,
-            'all'
+            $this->version
         );
         // enqueue style
         wp_enqueue_style($this->rate_my_post);
@@ -119,6 +128,7 @@ class Rate_My_Post_Public
                 'ajaxLoad'          => absint($options['ajaxLoad']),
                 'disableClearCache' => absint($options['disableClearCache']),
                 'nonce'             => wp_create_nonce('rmp_public_nonce'),
+                'is_not_votable'    => self::is_not_votable() ? 'true' : 'false'
             )
         );
 
@@ -313,7 +323,7 @@ class Rate_My_Post_Public
             );
 
             // variables
-            $post_id = absint($_POST['postID']);
+            $post_id     = absint($_POST['postID']);
             $post_status = get_post_status($post_id);
             if ($post_status != 'publish') {
                 die();
@@ -328,7 +338,7 @@ class Rate_My_Post_Public
             // security checks
             $security_passed = true;
             $recaptcha       = $this->is_recaptcha_valid($recaptcha_token);
-            $privilege       = $this->has_privileges($security_options);
+            $privilege       = $this->has_privileges();
             $ip_check        = $this->is_not_ip_double_vote($security_options, $custom_strings, $post_id);
             $required_data   = $this->all_rating_data_submitted($post_id, $submitted_rating);
             $nonce_check     = $this->has_valid_nonce($nonce);
@@ -436,8 +446,8 @@ class Rate_My_Post_Public
                 'errorMsg'   => array(),
             );
             // variables
-            $options = get_option('rmp_options');
-            $post_id = absint($_POST['postID']);
+            $options     = get_option('rmp_options');
+            $post_id     = absint($_POST['postID']);
             $post_status = get_post_status($post_id);
             if ($post_status != 'publish') {
                 die();
@@ -455,7 +465,7 @@ class Rate_My_Post_Public
 
             // security checks
             $security_passed = true;
-            $privilege       = $this->has_privileges($security_options);
+            $privilege       = $this->has_privileges();
             $ip_check        = $this->is_not_ip_double_vote($security_options, $custom_strings, $post_id);
             $required_data   = $this->all_rating_data_submitted($post_id, $submitted_rating);
             $nonce_check     = $this->has_valid_nonce($nonce);
@@ -574,7 +584,7 @@ class Rate_My_Post_Public
             // security checks
             $security_passed       = true;
             $recaptcha             = $this->is_recaptcha_valid($recaptcha_token);
-            $privilege             = $this->has_privileges($security_options);
+            $privilege             = $this->has_privileges();
             $rmp_token_check       = $this->feedback_token_verified($rmp_token, $rating_id);
             $feedback_length_check = $this->is_valid_length($feedback);
             $nonce_check           = $this->has_valid_nonce($nonce);
@@ -1206,19 +1216,15 @@ class Rate_My_Post_Public
     }
 
     // check if user has permission to interact
-    private function has_privileges($security_options)
+    private function has_privileges()
     {
         $data = array(
             'valid' => true,
             'error' => false,
         );
 
-        if ($security_options['votingPriv'] == 1) { // everybody can vote
-            return $data;
-        }
-
-        if ( ! is_user_logged_in()) {
-            $data['error'] = esc_html__('You need to be logged in to rate!', 'rate-my-post');
+        if ( self::is_not_votable()) {
+            $data['error'] = esc_html__('You are not authorized to rate!', 'rate-my-post');
             $data['valid'] = false;
         }
 

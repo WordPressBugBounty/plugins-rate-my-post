@@ -103,6 +103,43 @@ class Rate_My_Post_Admin
         return $content;
     }
 
+    private static function available_shortcodes_content()
+    {
+        $content = '<p style="border-bottom: 1px solid #eee">';
+        $content .= sprintf(
+            esc_html__('%s[ratemypost]%s displays rating widget.', 'rate-my-post'),
+            '<code>', '</code>'
+        );
+        $content .= '</p>';
+        $content .= sprintf(
+            esc_html__('%s[ratemypost id="1"]%s displays rating widget for the post with the ID of 1.', 'rate-my-post'),
+            '<code>', '</code>'
+        );
+        $content .= '</p>';
+
+        $content .= '<p style="border-bottom: 1px solid #eee">';
+        $content .= sprintf(
+            esc_html__('%s[ratemypost-result]%s displays results widget.', 'rate-my-post'),
+            '<code>', '</code>'
+        );
+        $content .= '</p>';
+        $content .= '<p style="border-bottom: 1px solid #eee">';
+        $content .= sprintf(
+            esc_html__('%s[ratemypost-result id="1"]%s displays results widget for the post with the ID of 1.', 'rate-my-post'),
+            '<code>', '</code>'
+        );
+        $content .= '</p>';
+
+        $content .= '<p>';
+        $content .= sprintf(
+            esc_html__('%s[ratemypost-top-rated]%s displays a list of top-rated posts. %sLearn more%s', 'rate-my-post'),
+            '<code>', '</code>', '<a href="https://feedbackwp.com/docs/#Top-rated_Posts_Widget" target="__blank">', '</a>'
+        );
+        $content .= '</p>';
+
+        return $content;
+    }
+
     private static function rmp_support_docs_sidebar_content($support_url, $review_url)
     {
         $link_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="linkIcon"><path d="M18.2 17c0 .7-.6 1.2-1.2 1.2H7c-.7 0-1.2-.6-1.2-1.2V7c0-.7.6-1.2 1.2-1.2h3.2V4.2H7C5.5 4.2 4.2 5.5 4.2 7v10c0 1.5 1.2 2.8 2.8 2.8h10c1.5 0 2.8-1.2 2.8-2.8v-3.6h-1.5V17zM14.9 3v1.5h3.7l-6.4 6.4 1.1 1.1 6.4-6.4v3.7h1.5V3h-6.3z"></path></svg>';
@@ -160,6 +197,17 @@ class Rate_My_Post_Admin
         <div class="postbox">
             <div class="postbox-header">
                 <h3 class="hndle is-non-sortable">
+                    <span><?php esc_html_e('Available Shortcodes', 'rate-my-post'); ?></span>
+                </h3>
+            </div>
+            <div class="inside">
+                <?php echo self::available_shortcodes_content() ?>
+            </div>
+        </div>
+
+        <div class="postbox">
+            <div class="postbox-header">
+                <h3 class="hndle is-non-sortable">
                     <span><?php esc_html_e('Docs & Support', 'rate-my-post'); ?></span>
                 </h3>
             </div>
@@ -178,7 +226,7 @@ class Rate_My_Post_Admin
     public function enqueue_styles()
     {
         wp_register_style(
-            $this->rate_my_post,
+            $this->rate_my_post . '-block',
             plugin_dir_url(__FILE__) . 'css/rate-my-post-admin.css',
             array(),
             $this->version,
@@ -186,7 +234,7 @@ class Rate_My_Post_Admin
         );
 
         // enqueue style
-        wp_enqueue_style($this->rate_my_post);
+        wp_enqueue_style($this->rate_my_post . '-block');
     }
 
     //---------------------------------------------------
@@ -391,7 +439,7 @@ class Rate_My_Post_Admin
             // variables
             $post_id     = absint($_POST['postID']);
             $feedback_id = sanitize_text_field($_POST['feedbackID']);
-            $nonce       = isset($_POST['nonce']) ? $_POST['nonce'] : false;
+            $nonce       = isset($_POST['nonce']) ?? false;
 
             // security checks
             if ( ! $this->has_required_capability($post_id)) {
@@ -512,7 +560,7 @@ class Rate_My_Post_Admin
             // variables
             $default_options = Rate_My_Post_Settings::default_options();
             $updated_options = array();
-            $nonce           = isset($_POST['nonce']) ? $_POST['nonce'] : false;
+            $nonce           = $_POST['nonce'] ?? false;
 
             if ( ! $this->is_administrator()) {
                 $data['valid']      = false;
@@ -561,7 +609,7 @@ class Rate_My_Post_Admin
                 'errorMsg'   => array()
             );
 
-            $nonce = isset($_POST['nonce']) ? $_POST['nonce'] : false;
+            $nonce = $_POST['nonce'] ?? false;
 
             if ( ! $this->is_administrator()) {
                 $data['valid']      = false;
@@ -797,7 +845,7 @@ class Rate_My_Post_Admin
                 'errorMsg'   => array()
             );
 
-            $nonce = isset($_POST['nonce']) ? $_POST['nonce'] : false;
+            $nonce = $_POST['nonce'] ?? false;
 
             if ( ! $this->is_administrator()) {
                 $data['valid']      = false;
@@ -848,7 +896,7 @@ class Rate_My_Post_Admin
                 'errorMsg'   => array()
             );
 
-            $nonce  = isset($_POST['nonce']) ? $_POST['nonce'] : false;
+            $nonce  = $_POST['nonce'] ?? false;
             $notice = sanitize_text_field($_POST['noticeKey']);
 
             if ( ! $this->is_administrator()) {
@@ -894,7 +942,7 @@ class Rate_My_Post_Admin
                 'errorMsg'   => array()
             );
 
-            $nonce = isset($_POST['nonce']) ? $_POST['nonce'] : false;
+            $nonce = isset($_POST['nonce']) ?? false;
 
             if ( ! $this->is_administrator()) {
                 $data['valid']      = false;
@@ -1018,6 +1066,11 @@ class Rate_My_Post_Admin
         } // endif
 
         wp_reset_postdata();
+
+        // ensure structured datatype is set.
+        $existing                       = get_option("rmp_options");
+        $existing['structuredDataType'] = 'CreativeWorkSeries';
+        update_option('rmp_options', $existing);
 
         return $count;
     }
