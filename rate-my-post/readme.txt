@@ -3,8 +3,8 @@ Contributors: collizo4sky, properfraction
 Donate link: https://feedbackwp.com/pricing/
 Tags: rating system, rate post, rate page, star rating, post rating
 Requires at least: 5.3
-Tested up to: 6.7
-Stable tag: 4.3.2
+Tested up to: 6.8
+Stable tag: 4.4.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -222,6 +222,9 @@ The invalid WP token error (refers to WP nonce) appears if a page is cached for 
 7. Manipulate Votes
 
 == Changelog ==
+
+= 4.4.0 =
+* Added button to export stats and analytics.
 
 = 4.3.2 =
 * Fixed bug with user tracking after rating not working.
