@@ -46,6 +46,7 @@ class Rate_My_Post
 
         // Manages admin side
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-rate-my-post-admin.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-rmp-data-import-export.php';
 
         // Manages public side
         require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-rate-my-post-public.php';
@@ -66,6 +67,7 @@ class Rate_My_Post
 
         //Fire the loader
         $this->loader = new Rate_My_Post_Loader();
+        new Rate_My_Post_Data_Import_Export();
     }
 
     // Register admin hooks

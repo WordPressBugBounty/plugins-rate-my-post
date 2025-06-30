@@ -57,7 +57,7 @@ class Rate_My_Post_Settings {
       'archivePages'        => 1,
       'socialShare'         => 1,
       'widgetAlign'         => 1,
-      'structuredDataType'  => 'none',
+      'structuredDataType'  => 'CreativeWorkSeries',
       'ajaxLoad'            => 1,
       'disableClearCache'   => 1,
     );

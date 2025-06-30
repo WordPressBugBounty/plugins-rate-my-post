@@ -51,7 +51,9 @@
       <ul class="rmp-rating-widget__icons-list js-rmp-rating-icons-list">
         <?php for ( $icons_count = 0; $icons_count < $max_rating; $icons_count++ ): ?>
           <li class="rmp-rating-widget__icons-list__icon js-rmp-rating-item" data-descriptive-rating="<?php echo $rmp_custom_strings['star' . ($icons_count + 1)]; ?>" data-value="<?php echo $icons_count + 1 ?>">
-            <i class="js-rmp-rating-icon <?php echo $rating_icon_type; ?> <?php echo $icon_classes[$icons_count]; ?>"></i>
+            <button type="button" class="js-rmp-rating-icon js-rmp-rating-item <?php echo $rating_icon_type; ?> <?php echo $icon_classes[ $icons_count ]; ?>" data-descriptive-rating="<?php echo $rmp_custom_strings[ 'star' . ( $icons_count + 1 ) ]; ?>" data-value="<?php echo $icons_count + 1 ?>">
+                <span class="visually-hidden"><?php echo $rmp_custom_strings[ 'star' . ( $icons_count + 1 ) ]; ?></span>
+            </button>
           </li>
         <?php endfor; ?>
       </ul>

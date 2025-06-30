@@ -1,5 +1,10 @@
 ﻿== Changelog ==
 
+= 4.4.1 =
+* Added import/export of settings.
+* Improved Accessibility.
+* Set default structured-data-type to CreativeWorkSeries.
+
 = 4.4.0 =
 * Added button to export stats and analytics.
 
