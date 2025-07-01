@@ -1,5 +1,9 @@
 ﻿== Changelog ==
 
+= 4.4.2 =
+* Reverted accessibility improvements as many had styling issues with it.
+* Added User ID support in email body filter.
+
 = 4.4.1 =
 * Added import/export of settings.
 * Improved Accessibility.

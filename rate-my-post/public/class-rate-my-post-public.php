@@ -814,7 +814,8 @@ class Rate_My_Post_Public
                 $new_avg_rating,
                 $new_vote_count,
                 $post_title,
-                $post_link
+                $post_link,
+                $user_id
             );
         }
 
@@ -850,7 +851,7 @@ class Rate_My_Post_Public
         }
         // filter for email body
         if (has_filter('rmp_feedback_mail_text')) {
-            $message = apply_filters('rmp_feedback_mail_text', $message, $post_id, $feedback, $post_title);
+            $message = apply_filters('rmp_feedback_mail_text', $message, $post_id, $feedback, $post_title, $user_id);
         }
 
         wp_mail($to, $subject, $message);

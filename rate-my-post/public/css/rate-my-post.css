@@ -305,30 +305,6 @@
 
 .rmp-rating-widget .rmp-icon--ratings {
     font-size: 2.5rem;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.rmp-rating-widget .rmp-icon--ratings:focus-visible {
-    color: #ffcc36;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: initial;
-    background: 0 0;
-    transition: .1s color ease-in
-}
-
-.rmp-rating-widget .visually-hidden {
-    border: 0;
-    clip: rect(0, 0, 0, 0);
-    clip-path: inset(50%);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
 }
 
 .rmp-icon--full-highlight {
