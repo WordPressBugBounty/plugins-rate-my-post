@@ -1,5 +1,8 @@
 ﻿== Changelog ==
 
+= 4.4.3 =
+* Fixed migration where kk star CPT reviews did not import.
+
 = 4.4.2 =
 * Reverted accessibility improvements as many had styling issues with it.
 * Added User ID support in email body filter.

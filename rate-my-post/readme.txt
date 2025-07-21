@@ -2,9 +2,9 @@
 Contributors: collizo4sky, properfraction
 Donate link: https://feedbackwp.com/pricing/
 Tags: rating system, rate post, rate page, star rating, post rating
-Requires at least: 5.3
+Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 4.4.2
+Stable tag: 4.4.3
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -222,6 +222,9 @@ The invalid WP token error (refers to WP nonce) appears if a page is cached for 
 7. Manipulate Votes
 
 == Changelog ==
+
+= 4.4.3 =
+* Fixed migration where kk star CPT reviews did not import.
 
 = 4.4.2 =
 * Reverted accessibility improvements as many had styling issues with it.

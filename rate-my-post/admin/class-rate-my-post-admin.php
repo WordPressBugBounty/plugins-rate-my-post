@@ -1016,7 +1016,7 @@ class Rate_My_Post_Admin
             $merge = apply_filters('rmp_migrate_merge', $merge);
         }
 
-        $args      = array(
+        $args = array(
             'fields'         => 'ids',
             'post_type'      => array(
                 'post',
@@ -1024,6 +1024,17 @@ class Rate_My_Post_Admin
             ),
             'posts_per_page' => -1,
         );
+
+        if ('_kksr_ratings' == $ratings_sum_field) {
+            $locations = (array)\Bhittani\StarRating\core\functions\option('locations');
+            unset($locations['home']);
+            unset($locations['archives']);
+
+            if ( ! empty($locations)) {
+                $args['post_type'] = array_merge($locations, $args['post_type']);
+            }
+        }
+
         $the_query = new WP_Query($args);
         if ($the_query->have_posts()) {
             while ($the_query->have_posts()) {
