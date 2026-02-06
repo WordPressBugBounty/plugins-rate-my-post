@@ -59,6 +59,16 @@
 
     <p class="rmp-rating-widget__hover-text js-rmp-hover-text"></p>
 
+    <?php
+      $rmp_security = get_option( 'rmp_security' );
+      $turnstile_enabled = isset($rmp_security['turnstile']) && absint($rmp_security['turnstile']) === 2;
+      $turnstile_site_key = isset($rmp_security['turnstileSiteKey']) ? str_replace(' ', '', $rmp_security['turnstileSiteKey']) : '';
+      $turnstile_secret_key = isset($rmp_security['turnstileSecretKey']) ? str_replace(' ', '', $rmp_security['turnstileSecretKey']) : '';
+      if ($turnstile_enabled && $turnstile_site_key && $turnstile_secret_key) {
+    ?>
+      <div id="cf-turnstile-rating-<?php echo esc_attr( $post_id ); ?>" class="cf-turnstile-rating"></div>
+    <?php } ?>
+
     <button class="rmp-rating-widget__submit-btn rmp-btn js-submit-rating-btn">
       <?php echo $rmp_custom_strings['submitButtonText']; ?>
     </button>

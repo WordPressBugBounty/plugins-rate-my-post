@@ -3,8 +3,8 @@ Contributors: collizo4sky, properfraction
 Donate link: https://feedbackwp.com/pricing/
 Tags: rating system, rate post, rate page, star rating, post rating
 Requires at least: 6.0
-Tested up to: 6.8
-Stable tag: 4.4.3
+Tested up to: 6.9
+Stable tag: 4.5.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -85,7 +85,7 @@ The plugin includes five components; rating widget, results widget, social widge
 
 12. Option to show descriptive ratings while a user hovers over rating icons
 
-13. Option to enable reCAPTCHA v3 protection
+13. Option to enable reCAPTCHA v3 and Cloudflare Turnstile protection
 
 14. Option to show results (visual rating) on archive pages
 
@@ -153,7 +153,7 @@ Display top-rated posts on your website with the "Top Rated Posts" widget. You c
 
 10. AMP compatibility
 
-11. reCAPTCHA v3 protection
+11. Cloudflare Turnstile and reCAPTCHA v3 protection
 
 12. Migration tools - easily migrate from kk Star Ratings, YASR or WP-PostRatings
 
@@ -223,6 +223,12 @@ The invalid WP token error (refers to WP nonce) appears if a page is cached for 
 
 == Changelog ==
 
+= 4.5.0 =
+* Added Cloudflare Turnstile integration.
+
+= 4.4.4 =
+* Switched to array data type for schema representation.
+
 = 4.4.3 =
 * Fixed migration where kk star CPT reviews did not import.
 
@@ -234,21 +240,5 @@ The invalid WP token error (refers to WP nonce) appears if a page is cached for 
 * Added import/export of settings.
 * Improved Accessibility.
 * Set default structured-data-type to CreativeWorkSeries.
-
-= 4.4.0 =
-* Added button to export stats and analytics.
-
-= 4.3.2 =
-* Fixed bug with user tracking after rating not working.
-
-= 4.3.1 =
-* Added tracking of user on email notification after rating.
-* Added tracking of user on email notification after feedback.
-* Fixed bug where nonce verification were failing.
-
-= 4.3.0 =
-* Added blocks for rating, result and top-rated posts.
-* Added rmp_is_not_votable filter.
-* Fixed issue where structured datatype is missing after migration.
 
 See the [changelog file](https://plugins.svn.wordpress.org/rate-my-post/trunk/changelog.txt) for full change log information.

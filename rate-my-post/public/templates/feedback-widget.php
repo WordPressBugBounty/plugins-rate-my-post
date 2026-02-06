@@ -37,6 +37,16 @@
 
     <textarea class="rmp-feedback-widget__input js-rmp-feedback-input" rows="5" id="feedback-text"></textarea>
 
+    <?php
+      $rmp_security = get_option( 'rmp_security' );
+      $turnstile_enabled = isset($rmp_security['turnstile']) && absint($rmp_security['turnstile']) === 2;
+      $turnstile_site_key = isset($rmp_security['turnstileSiteKey']) ? str_replace(' ', '', $rmp_security['turnstileSiteKey']) : '';
+      $turnstile_secret_key = isset($rmp_security['turnstileSecretKey']) ? str_replace(' ', '', $rmp_security['turnstileSecretKey']) : '';
+      if ($turnstile_enabled && $turnstile_site_key && $turnstile_secret_key) {
+    ?>
+      <div id="cf-turnstile-feedback-<?php echo esc_attr( $post_id ); ?>" class="cf-turnstile-feedback"></div>
+    <?php } ?>
+
     <button type="button" class="rmp-feedback-widget__btn rmp-btn rmp-btn--large js-rmp-feedback-button">
       <?php echo $rmp_custom_strings['feedbackButton']; ?>
     </button>

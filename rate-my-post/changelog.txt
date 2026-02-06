@@ -1,5 +1,11 @@
 ﻿== Changelog ==
 
+= 4.5.0 =
+* Added Cloudflare Turnstile integration.
+
+= 4.4.4 =
+* Switched to array data type for schema representation.
+
 = 4.4.3 =
 * Fixed migration where kk star CPT reviews did not import.
 

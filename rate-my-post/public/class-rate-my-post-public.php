@@ -101,6 +101,13 @@ class Rate_My_Post_Public
             null,
             false
         );
+        wp_register_script(
+            'rmp-turnstile',
+            'https://challenges.cloudflare.com/turnstile/v0/api.js',
+            array(),
+            null,
+            false
+        );
         // enqueue scripts
         wp_enqueue_script($this->rate_my_post);
         // localize script
@@ -108,27 +115,31 @@ class Rate_My_Post_Public
             $this->rate_my_post,
             'rmp_frontend',
             array(
-                'admin_ajax'        => admin_url('admin-ajax.php'),
-                'postID'            => get_the_id(),
-                'noVotes'           => $customization['noRating'],
-                'cookie'            => $customization['cookieNotice'],
-                'afterVote'         => $customization['afterVote'],
-                'notShowRating'     => absint($options['notShowRating']),
-                'social'            => $options['social'],
-                'feedback'          => $options['feedback'],
-                'cookieDisable'     => $options['cookieDisable'],
-                'emptyFeedback'     => $customization['feedbackAlert'],
-                'hoverTexts'        => absint($options['hoverTexts']),
-                'preventAccidental' => absint($options['preventAccidental']),
-                'grecaptcha'        => $this->do_recaptcha(),
-                'siteKey'           => $security['siteKey'],
-                'votingPriv'        => $security['votingPriv'],
-                'loggedIn'          => is_user_logged_in(),
-                'positiveThreshold' => absint($options['positiveNegative']),
-                'ajaxLoad'          => absint($options['ajaxLoad']),
-                'disableClearCache' => absint($options['disableClearCache']),
-                'nonce'             => wp_create_nonce('rmp_public_nonce'),
-                'is_not_votable'    => self::is_not_votable() ? 'true' : 'false'
+                'admin_ajax'           => admin_url('admin-ajax.php'),
+                'postID'               => get_the_id(),
+                'noVotes'              => $customization['noRating'],
+                'cookie'               => $customization['cookieNotice'],
+                'afterVote'            => $customization['afterVote'],
+                'notShowRating'        => absint($options['notShowRating']),
+                'social'               => $options['social'],
+                'feedback'             => $options['feedback'],
+                'cookieDisable'        => $options['cookieDisable'],
+                'emptyFeedback'        => $customization['feedbackAlert'],
+                'hoverTexts'           => absint($options['hoverTexts']),
+                'preventAccidental'    => absint($options['preventAccidental']),
+                'grecaptcha'           => $this->do_recaptcha(),
+                'siteKey'              => $security['siteKey'],
+                'turnstile'            => $this->do_turnstile(),
+                'turnstileSiteKey'     => isset($security['turnstileSiteKey']) ? $security['turnstileSiteKey'] : '',
+                'turnstileTheme'       => isset($security['turnstileTheme']) ? $security['turnstileTheme'] : 'auto',
+                'turnstileSize'        => isset($security['turnstileSize']) ? $security['turnstileSize'] : 'normal',
+                'votingPriv'           => $security['votingPriv'],
+                'loggedIn'             => is_user_logged_in(),
+                'positiveThreshold'    => absint($options['positiveNegative']),
+                'ajaxLoad'             => absint($options['ajaxLoad']),
+                'disableClearCache'    => absint($options['disableClearCache']),
+                'nonce'                => wp_create_nonce('rmp_public_nonce'),
+                'is_not_votable'       => self::is_not_votable() ? 'true' : 'false'
             )
         );
 
@@ -144,6 +155,19 @@ class Rate_My_Post_Public
             )
         ) {
             wp_enqueue_script('rmp-recaptcha');
+        };
+        // enqueue turnstile if necessary
+        if (
+            $this->do_turnstile() === 2 &&
+            (
+                ($options['posts'] === 2 &&
+                 is_singular('post')
+                ) ||
+                ($options['pages'] === 2 && is_page()) ||
+                ( ! empty($options['cptRating']) && is_singular($options['cptRating']))
+            )
+        ) {
+            wp_enqueue_script('rmp-turnstile');
         };
     }
 
@@ -170,6 +194,10 @@ class Rate_My_Post_Public
         // enqueue recaptcha
         if ($this->do_recaptcha() === 2) {
             wp_enqueue_script('rmp-recaptcha');
+        }
+        // enqueue turnstile
+        if ($this->do_turnstile() === 2) {
+            wp_enqueue_script('rmp-turnstile');
         }
 
         // output the rating widget
@@ -333,11 +361,13 @@ class Rate_My_Post_Public
             $submitted_rating = absint($_POST['star_rating']);
             $duration         = absint($_POST['duration']);
             $recaptcha_token  = $_POST['token'] ?? false;
+            $turnstile_token  = $_POST['turnstileToken'] ?? false;
             $nonce            = $_POST['nonce'] ?? false;
             $user             = $security_options['userTracking'] == 2 ? absint(get_current_user_id()) : false;
             // security checks
             $security_passed = true;
             $recaptcha       = $this->is_recaptcha_valid($recaptcha_token);
+            $turnstile       = $this->is_turnstile_valid($turnstile_token);
             $privilege       = $this->has_privileges();
             $ip_check        = $this->is_not_ip_double_vote($security_options, $custom_strings, $post_id);
             $required_data   = $this->all_rating_data_submitted($post_id, $submitted_rating);
@@ -346,6 +376,7 @@ class Rate_My_Post_Public
 
             $security_checks = array(
                 $recaptcha,
+                $turnstile,
                 $privilege,
                 $ip_check,
                 $required_data,
@@ -574,6 +605,7 @@ class Rate_My_Post_Public
             // variables
             $security_options = get_option('rmp_security');
             $recaptcha_token  = $_POST['token'] ?? false;
+            $turnstile_token  = $_POST['turnstileToken'] ?? false;
             $rmp_token        = $_POST['rating_token'] ?? false;
             $feedback         = sanitize_text_field($_POST['feedback']);
             $rating_id        = isset($_POST['rating_id']) ? absint($_POST['rating_id']) : false;
@@ -584,6 +616,7 @@ class Rate_My_Post_Public
             // security checks
             $security_passed       = true;
             $recaptcha             = $this->is_recaptcha_valid($recaptcha_token);
+            $turnstile             = $this->is_turnstile_valid($turnstile_token);
             $privilege             = $this->has_privileges();
             $rmp_token_check       = $this->feedback_token_verified($rmp_token, $rating_id);
             $feedback_length_check = $this->is_valid_length($feedback);
@@ -591,6 +624,7 @@ class Rate_My_Post_Public
 
             $security_checks = array(
                 $recaptcha,
+                $turnstile,
                 $privilege,
                 $rmp_token_check,
                 $feedback_length_check,
@@ -1378,6 +1412,74 @@ class Rate_My_Post_Public
         } else {
             return 1;
         }
+    }
+
+    private function do_turnstile()
+    {
+        $security  = get_option('rmp_security');
+        $turnstile = absint($security['turnstile']);
+        $siteKey   = str_replace(' ', '', $security['turnstileSiteKey']);
+        $secretKey = str_replace(' ', '', $security['turnstileSecretKey']);
+        if ($turnstile === 2 && $siteKey && $secretKey) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+
+    private function get_turnstile_response($token)
+    {
+        $response     = $token;
+        $rmp_security = get_option('rmp_security');
+        $secret       = $rmp_security['turnstileSecretKey'];
+        $turnstileUrl = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+        $request_body = array(
+            'secret'   => $secret,
+            'response' => $response,
+            'remoteip' => $_SERVER['REMOTE_ADDR'],
+        );
+        $request = wp_remote_post($turnstileUrl, array(
+            'body' => $request_body,
+        ));
+        $turnstile = wp_remote_retrieve_body($request);
+        $turnstile = json_decode($turnstile);
+        if (property_exists($turnstile, 'success')) {
+            return $turnstile->success;
+        } else {
+            return 'checkKeys';
+        }
+    }
+
+    private function is_turnstile_valid($turnstile_token)
+    {
+        $data = array(
+            'valid' => true,
+            'error' => false,
+        );
+
+        if ($this->do_turnstile() !== 2) {
+            return $data;
+        }
+
+        if (!$turnstile_token) {
+            $data['error'] = esc_html__('Turnstile verification failed', 'rate-my-post');
+            $data['valid'] = false;
+            return $data;
+        }
+
+        $success = $this->get_turnstile_response($turnstile_token);
+
+        if ($success === 'checkKeys') {
+            $data['error'] = esc_html__('Wrong Turnstile keys', 'rate-my-post');
+            $data['valid'] = false;
+        }
+
+        if ($success === false) {
+            $data['error'] = esc_html__('Blocked by Turnstile', 'rate-my-post');
+            $data['valid'] = false;
+        }
+
+        return $data;
     }
 
     //---------------------------------------------------

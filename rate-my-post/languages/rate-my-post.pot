@@ -1,36 +1,41 @@
-# Copyright (C) 2025 FeedbackWP
+# Copyright (C) 2026 FeedbackWP
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: FeedbackWP - Rate My Post - WP Rating System 4.4.3\n"
+"Project-Id-Version: FeedbackWP - Rate My Post - WP Rating System 4.5.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rate-my-post\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-21T11:13:10+00:00\n"
+"POT-Creation-Date: 2026-01-26T13:19:15+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.8.1\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rate-my-post\n"
 
 #. Plugin Name of the plugin
+#: rate-my-post.php
 msgid "FeedbackWP - Rate My Post - WP Rating System"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: rate-my-post.php
 msgid "https://feedbackwp.com"
 msgstr ""
 
 #. Description of the plugin
+#: rate-my-post.php
 msgid "Allows you to easily add rating functionality to your WordPress website."
 msgstr ""
 
 #. Author of the plugin
+#: rate-my-post.php
 msgid "FeedbackWP"
 msgstr ""
 
 #. Author URI of the plugin
+#: rate-my-post.php
 msgid "https://feedbackwp.com/"
 msgstr ""
 
@@ -150,6 +155,7 @@ msgid "Premium support"
 msgstr ""
 
 #: admin/class-rate-my-post-admin.php:88
+#, php-format
 msgid "Enhance the power of FeedbackWP with the premium version that include more features. %sLearn more%s"
 msgstr ""
 
@@ -158,34 +164,42 @@ msgid "Get FeedbackWP Premium →"
 msgstr ""
 
 #: admin/class-rate-my-post-admin.php:110
+#, php-format
 msgid "%s[ratemypost]%s displays rating widget."
 msgstr ""
 
 #: admin/class-rate-my-post-admin.php:115
+#, php-format
 msgid "%s[ratemypost id=\"1\"]%s displays rating widget for the post with the ID of 1."
 msgstr ""
 
 #: admin/class-rate-my-post-admin.php:122
+#, php-format
 msgid "%s[ratemypost-result]%s displays results widget."
 msgstr ""
 
 #: admin/class-rate-my-post-admin.php:128
+#, php-format
 msgid "%s[ratemypost-result id=\"1\"]%s displays results widget for the post with the ID of 1."
 msgstr ""
 
 #: admin/class-rate-my-post-admin.php:135
+#, php-format
 msgid "%s[ratemypost-top-rated]%s displays a list of top-rated posts. %sLearn more%s"
 msgstr ""
 
 #: admin/class-rate-my-post-admin.php:150
+#, php-format
 msgid "Whether you need help or have a new feature request, let us know. %sRequest Support%s"
 msgstr ""
 
 #: admin/class-rate-my-post-admin.php:158
+#, php-format
 msgid "Detailed documentation is also available on the plugin website. %sView Knowledge Base%s"
 msgstr ""
 
 #: admin/class-rate-my-post-admin.php:166
+#, php-format
 msgid "If you are enjoying FeedbackWP and find it useful, please consider leaving a ★★★★★ review on WordPress.org. %sLeave a Review%s"
 msgstr ""
 
@@ -355,18 +369,22 @@ msgid "Notice"
 msgstr ""
 
 #: admin/templates/admin-notices.php:24
+#, php-format
 msgid "We detected %s plugin installed on your website. %s works best if %s is configured as shown %shere%s."
 msgstr ""
 
 #: admin/templates/admin-notices.php:31
+#, php-format
 msgid "We detected %s plugin installed on your website. If you want to use %s on %sAMP pages%s, additional configuration is required. Learn more %shere%s."
 msgstr ""
 
 #: admin/templates/admin-notices.php:37
+#, php-format
 msgid "%s: Are you ready to boost your SEO with %s?"
 msgstr ""
 
 #: admin/templates/admin-notices.php:38
+#, php-format
 msgid "You've been using %1$s for a while now. Maybe it's time to check out the PREMIUM version which comes some neat features such as %2$scustom post type support%3$s, %2$sdifferent icon types%3$s, %2$sadvanced structured data%3$s and %2$custom rating widgets%3$s. If not, keep enjoying the free version :)"
 msgstr ""
 
@@ -606,6 +624,7 @@ msgid "Migration Tools"
 msgstr ""
 
 #: admin/templates/menu-migration.php:27
+#, php-format
 msgid "The plugin allows you to easily migrate ratings from the following plugins: %s. More rating plugins will be supported in the future. You can submit requests on the %ssupport forum%s."
 msgstr ""
 
@@ -758,6 +777,7 @@ msgid "AMP compatibility mode"
 msgstr ""
 
 #: admin/templates/menu-options.php:221
+#, php-format
 msgid "Adds a minimalistic rating and results widget on AMP pages. See the %sdocumentation%s"
 msgstr ""
 
@@ -778,6 +798,7 @@ msgid "Without structured data"
 msgstr ""
 
 #: admin/templates/menu-options.php:306
+#, php-format
 msgid "For more information about structured data and rich snippets see the %sdocumentation%s"
 msgstr ""
 
@@ -1015,6 +1036,7 @@ msgid "Spam Protection - Google reCAPTCHA v3"
 msgstr ""
 
 #: admin/templates/menu-security.php:118
+#, php-format
 msgid "The plugin supports Google reCAPTCHA v3 which verifies if an interaction is legitimate without any user interaction. You will need reCAPTCHA v3 site key and secret key to use this option. The service is free of charge. You can create keys on the %sGoogle reCAPTCHA website%s - choose the reCAPTCHA v3 type. ReCaptcha library adds a badge to your website with terms of use and privacy policy. You can hide it with custom css %s. However, note that you have to include a link to the terms of use and privacy policy according to the reCAPTCHA v3 Terms of Use."
 msgstr ""
 
@@ -1042,8 +1064,73 @@ msgstr ""
 msgid "Automatically verifies if interactions are legitimate. Unlike the reCAPTCHA v2, it does not require any interaction from the visitor"
 msgstr ""
 
-#: admin/templates/menu-security.php:170
-#: admin/templates/menu-security.php:177
+#: admin/templates/menu-security.php:172
+msgid "Spam Protection - Cloudflare Turnstile"
+msgstr ""
+
+#: admin/templates/menu-security.php:175
+#, php-format
+msgid "The plugin supports Cloudflare Turnstile which verifies if an interaction is legitimate. You will need Turnstile site key and secret key to use this option. The service is free of charge. You can create keys on the %sCloudflare Turnstile website%s."
+msgstr ""
+
+#: admin/templates/menu-security.php:179
+msgid "Turnstile Site Key"
+msgstr ""
+
+#: admin/templates/menu-security.php:189
+msgid "Insert Cloudflare Turnstile site key"
+msgstr ""
+
+#: admin/templates/menu-security.php:193
+msgid "Turnstile Secret Key"
+msgstr ""
+
+#: admin/templates/menu-security.php:203
+msgid "Insert Cloudflare Turnstile secret key"
+msgstr ""
+
+#: admin/templates/menu-security.php:207
+msgid "Turnstile Size"
+msgstr ""
+
+#: admin/templates/menu-security.php:215
+msgid "Normal"
+msgstr ""
+
+#: admin/templates/menu-security.php:218
+msgid "Compact"
+msgstr ""
+
+#: admin/templates/menu-security.php:222
+msgid "Select the size for the Turnstile widget"
+msgstr ""
+
+#: admin/templates/menu-security.php:226
+msgid "Turnstile Theme"
+msgstr ""
+
+#: admin/templates/menu-security.php:234
+msgid "Auto"
+msgstr ""
+
+#: admin/templates/menu-security.php:237
+msgid "Light"
+msgstr ""
+
+#: admin/templates/menu-security.php:240
+msgid "Dark"
+msgstr ""
+
+#: admin/templates/menu-security.php:244
+msgid "Select the theme for the Turnstile widget"
+msgstr ""
+
+#: admin/templates/menu-security.php:258
+msgid "Enable Turnstile"
+msgstr ""
+
+#: admin/templates/menu-security.php:267
+#: admin/templates/menu-security.php:274
 msgid "Save Security Options"
 msgstr ""
 
@@ -1165,108 +1252,108 @@ msgid "Invalid vote count or average rating!"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:112
-#: public/class-rate-my-post-public.php:1874
+#: public/class-rate-my-post-public.php:1976
 msgid "How useful was this post?"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:113
-#: public/class-rate-my-post-public.php:1875
+#: public/class-rate-my-post-public.php:1977
 msgid "Click on a star to rate it!"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:114
-#: public/class-rate-my-post-public.php:1876
+#: public/class-rate-my-post-public.php:1978
 msgid "Average rating"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:115
-#: public/class-rate-my-post-public.php:1877
+#: public/class-rate-my-post-public.php:1979
 msgid "Vote count:"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:116
-#: public/class-rate-my-post-public.php:1878
+#: public/class-rate-my-post-public.php:1980
 msgid "You already voted! This vote will not be counted!"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:117
-#: public/class-rate-my-post-public.php:1879
+#: public/class-rate-my-post-public.php:1981
 msgid "No votes so far! Be the first to rate this post."
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:118
-#: public/class-rate-my-post-public.php:1880
+#: public/class-rate-my-post-public.php:1982
 msgid "Thank you for rating this post!"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:119
-#: public/class-rate-my-post-public.php:1881
+#: public/class-rate-my-post-public.php:1983
 msgid "Not at all useful"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:120
-#: public/class-rate-my-post-public.php:1882
+#: public/class-rate-my-post-public.php:1984
 msgid "Somewhat useful"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:121
-#: public/class-rate-my-post-public.php:1883
+#: public/class-rate-my-post-public.php:1985
 msgid "Useful"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:122
-#: public/class-rate-my-post-public.php:1884
+#: public/class-rate-my-post-public.php:1986
 msgid "Fairly useful"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:123
-#: public/class-rate-my-post-public.php:1885
+#: public/class-rate-my-post-public.php:1987
 msgid "Very useful"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:124
-#: public/class-rate-my-post-public.php:1886
+#: public/class-rate-my-post-public.php:1988
 msgid "As you found this post useful..."
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:125
-#: public/class-rate-my-post-public.php:1887
+#: public/class-rate-my-post-public.php:1989
 msgid "Follow us on social media!"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:126
-#: public/class-rate-my-post-public.php:1888
+#: public/class-rate-my-post-public.php:1990
 msgid "We are sorry that this post was not useful for you!"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:127
-#: public/class-rate-my-post-public.php:1889
+#: public/class-rate-my-post-public.php:1991
 msgid "Let us improve this post!"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:128
-#: public/class-rate-my-post-public.php:1890
+#: public/class-rate-my-post-public.php:1992
 msgid "Tell us how we can improve this post?"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:129
-#: public/class-rate-my-post-public.php:1891
+#: public/class-rate-my-post-public.php:1993
 msgid "Thanks for your feedback!"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:130
-#: public/class-rate-my-post-public.php:1892
+#: public/class-rate-my-post-public.php:1994
 msgid "Submit Feedback"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:137
-#: public/class-rate-my-post-public.php:1362
-#: public/class-rate-my-post-public.php:1893
+#: public/class-rate-my-post-public.php:1396
+#: public/class-rate-my-post-public.php:1995
 msgid "Please insert your feedback in the box above!"
 msgstr ""
 
 #: common/class-rate-my-post-settings.php:149
-#: public/class-rate-my-post-public.php:1894
+#: public/class-rate-my-post-public.php:1996
 msgid "Submit Rating"
 msgstr ""
 
@@ -1300,86 +1387,100 @@ msgstr ""
 msgid "Go Premium"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:276
-#: public/class-rate-my-post-public.php:1344
+#: public/class-rate-my-post-public.php:304
+#: public/class-rate-my-post-public.php:1378
 msgid "You cannot rate a web page without an id!"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:315
+#: public/class-rate-my-post-public.php:343
 msgid "Ajax rating fail"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:437
+#: public/class-rate-my-post-public.php:468
 msgid "AMP ajax rating fail"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:558
+#: public/class-rate-my-post-public.php:589
 msgid "Ajax feedback fail"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:776
+#: public/class-rate-my-post-public.php:810
 msgid "Somebody rated"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:779
+#: public/class-rate-my-post-public.php:813
+#, php-format
 msgid "%s rated"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:782
+#: public/class-rate-my-post-public.php:816
 msgid "was rated"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:783
+#: public/class-rate-my-post-public.php:817
 msgid "and now has an average rating of"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:784
+#: public/class-rate-my-post-public.php:818
 msgid "based on"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:785
+#: public/class-rate-my-post-public.php:819
 msgid "vote(s)"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:786
+#: public/class-rate-my-post-public.php:820
 msgid "See the post: "
 msgstr ""
 
-#: public/class-rate-my-post-public.php:835
+#: public/class-rate-my-post-public.php:869
 msgid "Somebody left feedback on"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:838
+#: public/class-rate-my-post-public.php:872
+#, php-format
 msgid "%s left feedback on"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:840
+#: public/class-rate-my-post-public.php:874
 msgid "Feedback on"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:1160
-#: public/class-rate-my-post-public.php:1164
+#: public/class-rate-my-post-public.php:1194
+#: public/class-rate-my-post-public.php:1198
 msgid "Invalid Token"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:1215
+#: public/class-rate-my-post-public.php:1249
 msgid "Wrong reCAPTCHA keys"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:1220
+#: public/class-rate-my-post-public.php:1254
 msgid "Blocked by reCAPTCHA"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:1236
+#: public/class-rate-my-post-public.php:1270
 msgid "You are not authorized to rate!"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:1322
+#: public/class-rate-my-post-public.php:1356
 msgid "Invalid WP token!"
 msgstr ""
 
-#: public/class-rate-my-post-public.php:1348
+#: public/class-rate-my-post-public.php:1382
 msgid "No rating submitted!"
+msgstr ""
+
+#: public/class-rate-my-post-public.php:1465
+msgid "Turnstile verification failed"
+msgstr ""
+
+#: public/class-rate-my-post-public.php:1473
+msgid "Wrong Turnstile keys"
+msgstr ""
+
+#: public/class-rate-my-post-public.php:1478
+msgid "Blocked by Turnstile"
 msgstr ""
 
 #: public/templates/amp-rating-widget.php:115
