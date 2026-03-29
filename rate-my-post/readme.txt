@@ -3,8 +3,8 @@ Contributors: collizo4sky, properfraction
 Donate link: https://feedbackwp.com/pricing/
 Tags: rating system, rate post, rate page, star rating, post rating
 Requires at least: 6.0
-Tested up to: 6.9
-Stable tag: 4.5.0
+Tested up to: 7.0
+Stable tag: 4.5.1
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -223,6 +223,9 @@ The invalid WP token error (refers to WP nonce) appears if a page is cached for 
 
 == Changelog ==
 
+= 4.5.1 =
+* Accessibility improvements
+
 = 4.5.0 =
 * Added Cloudflare Turnstile integration.
 
@@ -231,14 +234,5 @@ The invalid WP token error (refers to WP nonce) appears if a page is cached for 
 
 = 4.4.3 =
 * Fixed migration where kk star CPT reviews did not import.
-
-= 4.4.2 =
-* Reverted accessibility improvements as many had styling issues with it.
-* Added User ID support in email body filter.
-
-= 4.4.1 =
-* Added import/export of settings.
-* Improved Accessibility.
-* Set default structured-data-type to CreativeWorkSeries.
 
 See the [changelog file](https://plugins.svn.wordpress.org/rate-my-post/trunk/changelog.txt) for full change log information.

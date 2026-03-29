@@ -112,7 +112,7 @@ class Rate_My_Post_Admin
         );
         $content .= '</p>';
         $content .= sprintf(
-            esc_html__('%s[ratemypost id="1"]%s displays rating widget for the post with the ID of 1.', 'rate-my-post'),
+            esc_html__('%s[ratemypost id="1"]%s displays rating widget for the post ID of 1.', 'rate-my-post'),
             '<code>', '</code>'
         );
         $content .= '</p>';

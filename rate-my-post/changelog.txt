@@ -1,5 +1,8 @@
 ﻿== Changelog ==
 
+= 4.5.1 =
+* Accessibility improvements
+
 = 4.5.0 =
 * Added Cloudflare Turnstile integration.
 
