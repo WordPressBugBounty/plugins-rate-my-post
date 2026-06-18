@@ -1,5 +1,9 @@
 ﻿== Changelog ==
 
+= 4.5.2 =
+* Fixed bug where Average Rating column in Post list exceeded 1 decimal place
+* Remove width styling for average-rating column in posts list page.
+
 = 4.5.1 =
 * Accessibility improvements
 

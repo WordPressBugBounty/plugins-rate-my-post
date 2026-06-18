@@ -1450,31 +1450,10 @@ class Rate_My_Post_Admin
 
             add_action("manage_{$post_type}_posts_custom_column", function ($column_name, $post_id) {
                 if ($column_name == 'rmp-average-rating') {
-                    echo get_post_meta($post_id, 'rmp_avg_rating', true);
+                    $val = get_post_meta($post_id, 'rmp_avg_rating', true);
+                    echo !empty($val) && is_numeric($val) ? round($val, 1) : '';
                 }
             }, 10, 2);
-
-            static $cache = null;
-
-            if (is_null($cache)) {
-
-                $cache = true;
-
-                add_action('admin_head', function () {
-
-                    $screen = get_current_screen();
-
-                    if ('edit' === $screen->base) {
-                        ?>
-                        <style>
-                            .fixed .column-rmp-average-rating {
-                                width: 10%;
-                            }
-                        </style>
-                        <?php
-                    }
-                });
-            }
         }
     }
 }
